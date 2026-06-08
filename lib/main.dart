@@ -32,35 +32,32 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            BlocBuilder<LampBloc, LampState>(
-              builder: (context, state) {
-                return Icon(
+        child: BlocBuilder<LampBloc, LampState>(
+          builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
                   Icons.lightbulb,
                   size: 100,
                   color: state.lamp ? Colors.amber : Colors.grey,
-                );
-              },
-            ),
+                ),
 
-            SizedBox(height: 30),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    context.read<LampBloc>().add(OffEvent());
-                  },
-                  child: BlocBuilder<LampBloc, LampState>(
-                    builder: (context, state) =>
-                        state.lamp ? Text('off') : Text('on'),
-                  ),
+                SizedBox(height: 30),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        context.read<LampBloc>().add(OffEvent());
+                      },
+                      child: state.lamp ? Text('off') : Text('on'),
+                    ),
+                  ],
                 ),
               ],
-            ),
-          ],
+            );
+          },
         ),
       ),
     );
